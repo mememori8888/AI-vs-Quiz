@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIチューニング vs 機械学習 クイズ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        .quiz-card {
+            min-height: 450px;
+        }
+        .option-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .correct {
+            background-color: #22c55e !important; /* Tailwind green-500 */
+            color: white !important;
+            border-color: #16a34a;
+        }
+        .incorrect {
+            background-color: #ef4444 !important; /* Tailwind red-500 */
+            color: white !important;
+            border-color: #dc2626;
+        }
+        .disabled-options .option-btn {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen p-4">
+
+    <div id="quiz-container" class="w-full max-w-2xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 quiz-card flex flex-col justify-between">
+            
+            <!-- Quiz Header -->
+            <div id="quiz-header">
+                <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 dark:text-white mb-2">AIチューニング vs 機械学習</h1>
+                <p class="text-center text-gray-600 dark:text-gray-400 mb-6">違いを理解するためのクイズ</p>
+                <div class="flex justify-between items-center mb-4">
+                    <div id="progress-text" class="text-sm font-medium text-gray-600 dark:text-gray-400">質問 1 / 4</div>
+                    <div id="score-text" class="text-sm font-medium text-gray-600 dark:text-gray-400">スコア: 0</div>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 25%"></div>
+                </div>
+            </div>
+
+            <!-- Quiz Body -->
+            <div id="quiz-body">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-semibold my-6 text-center text-gray-900 dark:text-white">ここに質問文が入ります。</h2>
+                <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Options will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Quiz Footer -->
+            <div id="quiz-footer" class="mt-6">
+                 <div id="explanation-container" class="hidden bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mt-4">
+                    <p id="explanation-text" class="text-sm text-gray-700 dark:text-gray-300"></p>
+                </div>
+                <button id="next-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 mt-4 hidden">
+                    次の質問へ
+                </button>
+            </div>
+
+            <!-- Final Results -->
+            <div id="results-container" class="hidden text-center flex-grow flex flex-col items-center justify-center">
+                 <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">クイズ完了！</h2>
+                 <p class="text-xl mb-6 text-gray-700 dark:text-gray-300">あなたの最終スコアは...</p>
+                 <div id="final-score" class="text-6xl font-bold text-blue-600 mb-8"></div>
+                 <button id="restart-btn" class="w-full sm:w-auto bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200">
+                    もう一度挑戦する
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "「データからパターンを学習し、予測モデルを構築する」という広範なプロセスを指すのはどちらですか？",
+                options: ["AIチューニング", "機械学習"],
+                answer: "機械学習",
+                explanation: "機械学習は、データを用いてモデル自体をゼロから、あるいは既存のアルゴリズムを基に訓練し、構築するプロセス全体を指します。"
+            },
+            {
+                question: "既存の学習済みAIモデルの性能を、特定のタスクに合わせてさらに向上させるための微調整作業を指すのはどちらですか？",
+                options: ["AIチューニング", "機械学習"],
+                answer: "AIチューニング",
+                explanation: "AIチューニング（特にファインチューニング）は、既に学習が完了したモデルを基に、そのパラメータを少しだけ調整して、特定の目的やデータセットに特化させる作業です。"
+            },
+            {
+                question: "「家の設計図を描き、基礎工事から始めて家を建てる」というプロセスに例えられるのはどちらですか？",
+                options: ["AIチューニング", "機械学習"],
+                answer: "機械学習",
+                explanation: "機械学習は、モデルの構造決定から学習まで、全体を構築するプロセスであり、家を建てることに例えられます。一方、AIチューニングは完成した家の内装を変更するようなものです。"
+            },
+            {
+                question: "モデルの「ハイパーパラメータ」を調整して、過学習を防いだり、予測精度を改善したりする作業は、主にどちらの分野に含まれますか？",
+                options: ["AIチューニング", "機械学習"],
+                answer: "AIチューニング",
+                explanation: "ハイパーパラメータチューニングは、AIチューニングの代表的な手法です。モデルの学習プロセス自体を制御する設定（学習率など）を最適化し、モデルの汎化性能を高めます。"
+            }
+        ];
+
+        // DOM Elements
+        const quizContainer = document.getElementById('quiz-container');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextBtn = document.getElementById('next-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const scoreText = document.getElementById('score-text');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const quizHeader = document.getElementById('quiz-header');
+        const quizBody = document.getElementById('quiz-body');
+        const quizFooter = document.getElementById('quiz-footer');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultsContainer.classList.add('hidden');
+            quizHeader.style.display = 'block';
+            quizBody.style.display = 'block';
+            quizFooter.style.display = 'block';
+            nextBtn.classList.add('hidden');
+            explanationContainer.classList.add('hidden');
+            updateProgress();
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionText.innerText = currentQuestion.question;
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.classList.add('option-btn', 'w-full', 'bg-white', 'dark:bg-gray-700', 'border', 'border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300', 'font-semibold', 'py-3', 'px-4', 'rounded-lg', 'focus:outline-none', 'focus:ring-2', 'focus:ring-offset-2', 'dark:focus:ring-offset-gray-800', 'focus:ring-blue-500');
+                button.addEventListener('click', selectAnswer);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function resetState() {
+            nextBtn.classList.add('hidden');
+            explanationContainer.classList.add('hidden');
+            while (optionsContainer.firstChild) {
+                optionsContainer.removeChild(optionsContainer.firstChild);
+            }
+            optionsContainer.classList.remove('disabled-options');
+        }
+
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.innerText === quizData[currentQuestionIndex].answer;
+
+            if (isCorrect) {
+                score++;
+                selectedBtn.classList.add('correct');
+            } else {
+                selectedBtn.classList.add('incorrect');
+            }
+            
+            // Show correct answer
+            Array.from(optionsContainer.children).forEach(button => {
+                if (button.innerText === quizData[currentQuestionIndex].answer) {
+                    if(!button.classList.contains('correct')) button.classList.add('correct');
+                }
+            });
+
+            optionsContainer.classList.add('disabled-options');
+            
+            // Show explanation
+            explanationText.innerText = quizData[currentQuestionIndex].explanation;
+            explanationContainer.classList.remove('hidden');
+
+            if (quizData.length > currentQuestionIndex + 1) {
+                nextBtn.classList.remove('hidden');
+            } else {
+                // End of quiz
+                setTimeout(showResults, 1000);
+            }
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            scoreText.innerText = `スコア: ${score}`;
+            progressText.innerText = `質問 ${currentQuestionIndex + 1} / ${quizData.length}`;
+            const progressPercentage = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+        
+        function showNextQuestion() {
+            currentQuestionIndex++;
+            showQuestion();
+            updateProgress();
+        }
+
+        function showResults() {
+            quizHeader.style.display = 'none';
+            quizBody.style.display = 'none';
+            quizFooter.style.display = 'none';
+            resultsContainer.classList.remove('hidden');
+            finalScore.innerText = `${score} / ${quizData.length}`;
+        }
+
+        nextBtn.addEventListener('click', showNextQuestion);
+        restartBtn.addEventListener('click', startQuiz);
+
+        // Initial start
+        startQuiz();
+    </script>
+</body>
+</html>

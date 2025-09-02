@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIチューニング vs 機械学習 クイズ</title>
+    <title>AIチューニング vs 機械学習【50問チャレンジ】</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +11,7 @@
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
         }
         .quiz-card {
-            min-height: 450px;
+            min-height: 480px;
         }
         .option-btn {
             transition: all 0.2s ease-in-out;
@@ -44,20 +44,20 @@
             <!-- Quiz Header -->
             <div id="quiz-header">
                 <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 dark:text-white mb-2">AIチューニング vs 機械学習</h1>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-6">違いを理解するためのクイズ</p>
-                <div class="flex justify-between items-center mb-4">
-                    <div id="progress-text" class="text-sm font-medium text-gray-600 dark:text-gray-400">質問 1 / 4</div>
-                    <div id="score-text" class="text-sm font-medium text-gray-600 dark:text-gray-400">スコア: 0</div>
+                <p class="text-center text-gray-600 dark:text-gray-400 mb-6">【50問チャレンジ】</p>
+                <div class="flex justify-between items-center mb-4 text-sm">
+                    <div id="progress-text" class="font-medium text-gray-600 dark:text-gray-400">質問 1 / 50</div>
+                    <div id="score-text" class="font-medium text-gray-600 dark:text-gray-400">スコア: 0</div>
                 </div>
                 <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 25%"></div>
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 2%"></div>
                 </div>
             </div>
 
             <!-- Quiz Body -->
             <div id="quiz-body">
                 <h2 id="question-text" class="text-xl sm:text-2xl font-semibold my-6 text-center text-gray-900 dark:text-white">ここに質問文が入ります。</h2>
-                <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div id="options-container" class="grid grid-cols-1 gap-4">
                     <!-- Options will be dynamically inserted here -->
                 </div>
             </div>
@@ -86,34 +86,68 @@
 
     <script>
         const quizData = [
-            {
-                question: "「データからパターンを学習し、予測モデルを構築する」という広範なプロセスを指すのはどちらですか？",
-                options: ["AIチューニング", "機械学習"],
-                answer: "機械学習",
-                explanation: "機械学習は、データを用いてモデル自体をゼロから、あるいは既存のアルゴリズムを基に訓練し、構築するプロセス全体を指します。"
-            },
-            {
-                question: "既存の学習済みAIモデルの性能を、特定のタスクに合わせてさらに向上させるための微調整作業を指すのはどちらですか？",
-                options: ["AIチューニング", "機械学習"],
-                answer: "AIチューニング",
-                explanation: "AIチューニング（特にファインチューニング）は、既に学習が完了したモデルを基に、そのパラメータを少しだけ調整して、特定の目的やデータセットに特化させる作業です。"
-            },
-            {
-                question: "「家の設計図を描き、基礎工事から始めて家を建てる」というプロセスに例えられるのはどちらですか？",
-                options: ["AIチューニング", "機械学習"],
-                answer: "機械学習",
-                explanation: "機械学習は、モデルの構造決定から学習まで、全体を構築するプロセスであり、家を建てることに例えられます。一方、AIチューニングは完成した家の内装を変更するようなものです。"
-            },
-            {
-                question: "モデルの「ハイパーパラメータ」を調整して、過学習を防いだり、予測精度を改善したりする作業は、主にどちらの分野に含まれますか？",
-                options: ["AIチューニング", "機械学習"],
-                answer: "AIチューニング",
-                explanation: "ハイパーパラメータチューニングは、AIチューニングの代表的な手法です。モデルの学習プロセス自体を制御する設定（学習率など）を最適化し、モデルの汎化性能を高めます。"
-            }
-        ];
+            // Definitions & Scope
+            { question: "データからパターンを学習し、予測や分類のためのモデルを構築する、という広範な技術分野を指すのはどちら？", answer: "機械学習", explanation: "機械学習は、アルゴリズムがデータから学習するプロセス全体を指す、より包括的な概念です。" },
+            { question: "既存の学習済みモデルの性能を、特定のタスクに合わせてさらに向上させるための微調整作業を指すのはどちら？", answer: "AIチューニング", explanation: "AIチューニングは、すでにあるモデルを特定の目的に特化させる「最適化」のプロセスです。" },
+            { question: "AI開発において、より上流のプロセス（基礎となるモデル作り）に位置するのはどちら？", answer: "機械学習", explanation: "まず機械学習によってモデルが作られ、その後、必要に応じてチューニングが行われます。" },
+            { question: "「モデルのアーキテクチャ（構造）を設計する」という作業が含まれるのは主にどちら？", answer: "機械学習", explanation: "モデルの構造をゼロから、あるいは既存の論文を参考に設計するのは、機械学習の根幹をなすプロセスです。" },
+            { question: "「転移学習」というアプローチと密接に関連しているのはどちら？", answer: "AIチューニング", explanation: "転移学習は、ある領域で学習されたモデルの知識を別の領域に適応させる手法で、ファインチューニングの基礎となります。" },
+            { question: "より広い概念であり、もう一方の概念を内包しているのはどちら？", answer: "機械学習", explanation: "AIチューニングは、機械学習という大きな枠組みの中で行われる特定のタスクの一つです。" },
+            { question: "「モデルの汎化性能を高める」ことを主な目的とするのはどちら？", answer: "AIチューニング", explanation: "チューニングは、未知のデータに対しても高い精度を出す（汎化性能）ために、ハイパーパラメータなどを調整します。" },
+            { question: "「特徴量エンジニアリング（Feature Engineering）」が重要な役割を果たすのは主にどちら？", answer: "機械学習", explanation: "モデルが学習しやすいように、元のデータから有益な特徴量を作成する作業は、伝統的な機械学習において非常に重要です。" },
+            { question: "膨大なデータセットを使って、ゼロからモデルを事前学習させるプロセスはどちら？", answer: "機械学習", explanation: "大規模な汎用モデル（基盤モデル）を作る最初のステップは、機械学習そのものです。" },
+            { question: "「プロンプトエンジニアリング」は、現代の生成AIにおいて、どちらの概念に近い？", answer: "AIチューニング", explanation: "既存の巨大言語モデルに対し、最適な指示（プロンプト）を与えることで出力を調整するのは、広義のAIチューニングと言えます。" },
+            
+            // Starting Point & Goal
+            { question: "主な出発点が「学習済みのAIモデル」であるのはどちら？", answer: "AIチューニング", explanation: "AIチューニングは、すでにあるモデルを改良することから始まります。" },
+            { question: "主な出発点が「生のデータセットとアルゴリズム」であるのはどちら？", answer: "機械学習", explanation: "機械学習は、データとそれを学習するためのアルゴリズムからモデルを構築します。" },
+            { question: "主な目的が「新しい知識や能力をモデルに獲得させる」ことなのはどちら？", answer: "機械学習", explanation: "データに潜むパターンを学習し、新しい予測能力などを獲得することが機械学習の目的です。" },
+            { question: "主な目的が「既存の能力を特定の文脈に適合させる」ことなのはどちら？", answer: "AIチューニング", explanation: "汎用的な能力を、特定の業界の専門用語や特定の画像スタイルなどに適合させます。" },
+            { question: "一般的に、より多くの計算資源（計算時間やコスト）を必要とするのはどちらのプロセス？", answer: "機械学習", explanation: "ゼロからモデルを学習させるのは、既存モデルを微調整するよりもはるかに多くの計算量を必要とします。" },
+            { question: "「特化」や「専門化」という言葉がしっくりくるのはどちら？", answer: "AIチューニング", explanation: "ゼネラリスト（汎用モデル）をスペシャリスト（特化モデル）に育てるイメージです。" },
+            { question: "「創造」や「発見」という言葉がしっくりくるのはどちら？", answer: "機械学習", explanation: "データの中から新たなパターンや関係性を発見し、モデルを創造するイメージです。" },
+            { question: "手元に比較的小規模な「特定のタスクに関するデータセット」しかない場合に有効なのはどちら？", answer: "AIチューニング", explanation: "汎用的な事前学習済みモデルを、手元の小規模データでチューニングするのが効率的です。" },
+            { question: "世の中にまだ存在しない、全く新しい課題に取り組むモデルを作りたい場合に選ぶべきアプローチはどちら？", answer: "機械学習", explanation: "既存のモデルが対応できない新しい課題には、機械学習によって新たなモデルを構築する必要があります。" },
+            { question: "「LoRA (Low-Rank Adaptation)」のような効率的な適応技術が用いられるのはどちらの文脈？", answer: "AIチューニング", explanation: "LoRAは、大規模モデルの重みを直接変更せず、小さな追加層を学習させることで効率的にチューニングする手法です。" },
+            
+            // Analogies
+            { question: "料理に例えると、「基本的な調理法（焼く、煮るなど）を学ぶ」ことに相当するのはどちら？", answer: "機械学習", explanation: "機械学習は、データから何かを生み出すための基本的な能力を身につけるプロセスです。" },
+            { question: "料理に例えると、「完成した料理にスパイスを加えて、特定の好みに合わせる」ことに相当するのはどちら？", answer: "AIチューニング", explanation: "AIチューニングは、ベースとなるモデル（料理）の味を微調整する作業です。" },
+            { question: "家づくりに例えると、「設計図を描き、基礎工事から始めて家全体を建てる」のはどちら？", answer: "機械学習", explanation: "機械学習は、モデルの構造から学習まで、全体を構築するプロセスです。" },
+            { question: "家づくりに例えると、「完成した家の内装を特定のテーマに合わせてリフォームする」のはどちら？", answer: "AIチューニング", explanation: "チューニングは、既存の構造（モデル）を活かしつつ、特定の目的に合わせて内部を改装するようなものです。" },
+            { question: "楽器演奏に例えると、「全くの初心者が楽譜の読み方や指の動かし方を学ぶ」のはどちら？", answer: "機械学習", explanation: "基礎的な能力を獲得する学習プロセスが機械学習です。" },
+            { question: "楽器演奏に例えると、「プロの演奏家が、特定のコンサートホールの音響に合わせて自分の演奏を微調整する」のはどちら？", answer: "AIチューニング", explanation: "すでに高い能力を持つ者が、特定の環境に最適化させるのがチューニングです。" },
+            { question: "自動車に例えると、「エンジンやトランスミッションを設計・開発する」のはどちら？", answer: "機械学習", explanation: "システムの根幹となる、動力源や基本性能を作り出すのが機械学習です。" },
+            { question: "自動車に例えると、「市販車をレース用にサスペンションやECU（エンジン制御ユニット）を調整する」のはどちら？", answer: "AIチューニング", explanation: "市販車（汎用モデル）を特定の目的（レース）に特化させるのがチューニングです。" },
+            { question: "言語学習に例えると、「文法や基本単語を学んで、新しい言語を話せるようになる」のはどちら？", answer: "機械学習", explanation: "新しい言語能力そのものを獲得するプロセスです。" },
+            { question: "言語学習に例えると、「流暢な話者が、特定の地域の方言やスラングを覚えて使いこなす」のはどちら？", answer: "AIチューニング", explanation: "すでに持つ言語能力を、特定のコミュニティに合わせて最適化するプロセスです。" },
 
+            // Specific Techniques & Terms
+            { question: "「ハイパーパラメータ」の最適化は、どちらの活動の中心？", answer: "AIチューニング", explanation: "学習率やバッチサイズといった、学習プロセスを制御するハイパーパラメータの調整は、チューニングの代表的な作業です。" },
+            { question: "「グリッドサーチ」や「ベイズ最適化」といった手法が使われるのは、主にどちらの文脈？", answer: "AIチューニング", explanation: "これらは、最適なハイパーパラメータの組み合わせを効率的に探索するための手法です。" },
+            { question: "モデルの「過学習（Overfitting）」を防ぐために直接的に行われることが多いのはどちら？", answer: "AIチューニング", explanation: "正則化の強さやドロップアウト率といったハイパーパラメータを調整することで、過学習を抑制します。" },
+            { question: "「学習率（Learning Rate）」というパラメータの調整は、どちらに分類される？", answer: "AIチューニング", explanation: "学習率は、モデルがどれくらいのペースで学習を進めるかを決める重要なハイパーパラメータです。" },
+            { question: "「どのアルゴリズム（例: 決定木、SVM、ニューラルネットワーク）を選択するか」という意思決定はどちらの段階？", answer: "機械学習", explanation: "課題に対して、どの学習手法が最も適しているかを選択するのは、機械学習の初期段階の重要なプロセスです。" },
+            { question: "「データのクレンジングや前処理」が、モデルの性能に極めて大きな影響を与えるのはどちら？", answer: "機械学習", explanation: "ゴミデータを学習させるとゴミモデルしか生まれません。質の高いモデルを作るには、質の高いデータが不可欠です。" },
+            { question: "「ファインチューニング（Fine-tuning）」という言葉とほぼ同義で使われるのはどちら？", answer: "AIチューニング", explanation: "ファインチューニングは、AIチューニングの最も代表的な手法の一つです。" },
+            { question: "モデルの出力層だけを新しいタスクに合わせて再学習させる手法は、どちらに含まれる？", answer: "AIチューニング", explanation: "これは転移学習の一般的なアプローチで、計算コストを抑えながら効率的にモデルを適応させる手法です。" },
+            { question: "「蒸留（Distillation）」という技術を使って、巨大なモデルを軽量なモデルに圧縮するプロセスは、どちらに近い？", answer: "AIチューニング", explanation: "既存のモデル（教師モデル）の知識を活用して、別のモデル（生徒モデル）を効率的に学習させる最適化プロセスです。" },
+            { question: "「教師あり学習」「教師なし学習」「強化学習」といった分類は、どちらの分野の用語？", answer: "機械学習", explanation: "これらは、データと学習方法の種類に応じた、機械学習の主要なパラダイムです。" },
+
+            // Scenarios & Relationship
+            { question: "ある企業が、世界中の猫の画像100万枚を使って「猫画像認識AI」をゼロから開発した。これはどちら？", answer: "機械学習", explanation: "大規模データから新しい能力を持つモデルを構築しているので、機械学習のプロセスです。" },
+            { question: "その企業が開発した「猫画像認識AI」を、動物病院が「レントゲン写真から特定の猫の病気の兆候を見つける」ために再学習させた。これはどちら？", answer: "AIチューニング", explanation: "既存の汎用モデルを、特定の専門的なタスクに適合させているので、AIチューニングです。" },
+            { question: "True or False: AIチューニングは、機械学習のプロセスなしに単独で行うことができる。", answer: "False", explanation: "チューニングの対象となる「学習済みモデル」は、機械学習のプロセスを経て作られるため、チューニングは機械学習を前提としています。" },
+            { question: "True or False: 機械学習でモデルを訓練する際、何らかの形で（意図的でなくても）チューニングが行われている。", answer: "True", explanation: "ハイパーパラメータには通常デフォルト値が設定されています。それを使うことも広義には「チューニングしないというチューニング」と見なせます。" },
+            { question: "より「創造的」なプロセスと言えるのはどちら？", answer: "機械学習", explanation: "データから未知の構造やパターンを見つけ出し、新しいモデルを「創造」する側面が強いです。" },
+            { question: "より「工芸的・職人的」なプロセスと言えるのはどちら？", answer: "AIチューニング", explanation: "既存の素材（モデル）を、経験と知識に基づいて丹念に磨き上げ、性能を最大限に引き出す側面が強いです。" },
+            { question: "もしあなたが全く新しいタイプのセンサーデータを分析するAIを作りたいなら、まずどちらから始めるべき？", answer: "機械学習", explanation: "既存のモデルが対応できない未知のデータなので、そのデータ構造を学習する新しいモデルを機械学習で構築する必要があります。" },
+            { question: "もしあなたが公開されている高性能な文章生成AIを、自社のカスタマーサポートの口調に合わせたいなら、どちらを行うべき？", answer: "AIチューニング", explanation: "高性能な基盤モデルを、自社の特定の文体や知識に合わせてファインチューニングするのが最も効率的で効果的です。" },
+            { question: "「AIモデルのライフサイクル」において、本番運用後に行われることが多いのはどちら？", answer: "AIチューニング", explanation: "運用中に得られた新しいデータを使ってモデルの性能を再調整したり、環境の変化に適応させたりするためにチューニングが行われます。" },
+            { question: "最終的な結論として、AIチューニングは機械学習の一部であると言えるか？", answer: "Yes", explanation: "はい、AIチューニングは、機械学習という広範な分野における、モデルの最適化と適応に特化した重要なサブプロセスです。" }
+        ].map(q => ({ ...q, options: ["AIチューニング", "機械学習"] }));
+        
         // DOM Elements
-        const quizContainer = document.getElementById('quiz-container');
         const questionText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
         const nextBtn = document.getElementById('next-btn');
@@ -139,8 +173,6 @@
             quizHeader.style.display = 'block';
             quizBody.style.display = 'block';
             quizFooter.style.display = 'block';
-            nextBtn.classList.add('hidden');
-            explanationContainer.classList.add('hidden');
             updateProgress();
             showQuestion();
         }
@@ -150,7 +182,10 @@
             const currentQuestion = quizData[currentQuestionIndex];
             questionText.innerText = currentQuestion.question;
 
-            currentQuestion.options.forEach(option => {
+            // ランダムな順序で選択肢を表示
+            const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach(option => {
                 const button = document.createElement('button');
                 button.innerText = option;
                 button.classList.add('option-btn', 'w-full', 'bg-white', 'dark:bg-gray-700', 'border', 'border-gray-300', 'dark:border-gray-600', 'text-gray-700', 'dark:text-gray-300', 'font-semibold', 'py-3', 'px-4', 'rounded-lg', 'focus:outline-none', 'focus:ring-2', 'focus:ring-offset-2', 'dark:focus:ring-offset-gray-800', 'focus:ring-blue-500');
@@ -170,7 +205,13 @@
 
         function selectAnswer(e) {
             const selectedBtn = e.target;
-            const isCorrect = selectedBtn.innerText === quizData[currentQuestionIndex].answer;
+            const correctAnsw = quizData[currentQuestionIndex].answer;
+            // 'Yes'/'No' や 'True'/'False' のような質問に対応
+            const isCorrect = (correctAnsw.toLowerCase() === 'yes' || correctAnsw.toLowerCase() === 'true') ? 
+                              (selectedBtn.innerText === quizData[currentQuestionIndex].options[0]) :
+                              (correctAnsw.toLowerCase() === 'no' || correctAnsw.toLowerCase() === 'false') ? 
+                              (selectedBtn.innerText === quizData[currentQuestionIndex].options[1]) :
+                              (selectedBtn.innerText === correctAnsw);
 
             if (isCorrect) {
                 score++;
@@ -179,32 +220,35 @@
                 selectedBtn.classList.add('incorrect');
             }
             
-            // Show correct answer
             Array.from(optionsContainer.children).forEach(button => {
-                if (button.innerText === quizData[currentQuestionIndex].answer) {
-                    if(!button.classList.contains('correct')) button.classList.add('correct');
+                const buttonIsCorrect = (correctAnsw.toLowerCase() === 'yes' || correctAnsw.toLowerCase() === 'true') ? 
+                              (button.innerText === quizData[currentQuestionIndex].options[0]) :
+                              (correctAnsw.toLowerCase() === 'no' || correctAnsw.toLowerCase() === 'false') ? 
+                              (button.innerText === quizData[currentQuestionIndex].options[1]) :
+                              (button.innerText === correctAnsw);
+                if (buttonIsCorrect) {
+                   if(!button.classList.contains('correct')) button.classList.add('correct');
                 }
             });
 
             optionsContainer.classList.add('disabled-options');
             
-            // Show explanation
-            explanationText.innerText = quizData[currentQuestionIndex].explanation;
+            explanationText.innerText = `正解は「${correctAnsw}」。\n${quizData[currentQuestionIndex].explanation}`;
             explanationContainer.classList.remove('hidden');
 
             if (quizData.length > currentQuestionIndex + 1) {
                 nextBtn.classList.remove('hidden');
             } else {
-                // End of quiz
-                setTimeout(showResults, 1000);
+                setTimeout(showResults, 1500);
             }
             updateProgress();
         }
         
         function updateProgress() {
             scoreText.innerText = `スコア: ${score}`;
-            progressText.innerText = `質問 ${currentQuestionIndex + 1} / ${quizData.length}`;
-            const progressPercentage = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            const questionNumber = currentQuestionIndex < quizData.length ? currentQuestionIndex + 1 : quizData.length;
+            progressText.innerText = `質問 ${questionNumber} / ${quizData.length}`;
+            const progressPercentage = (questionNumber / quizData.length) * 100;
             progressBar.style.width = `${progressPercentage}%`;
         }
         
@@ -225,7 +269,7 @@
         nextBtn.addEventListener('click', showNextQuestion);
         restartBtn.addEventListener('click', startQuiz);
 
-        // Initial start
+        // クイズ開始
         startQuiz();
     </script>
 </body>
